@@ -1,17 +1,36 @@
 ﻿using DesafioFundamentos.Models;
+using System;
 
 // Coloca o encoding para UTF8 para exibir acentuação
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 decimal precoInicial = 0;
 decimal precoPorHora = 0;
+bool isDecimal;
 
-Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
-                  "Digite o preço inicial:");
-precoInicial = Convert.ToDecimal(Console.ReadLine());
+do
+{
+    Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
+                      "Digite o preço inicial:");
+    isDecimal = Decimal.TryParse(Console.ReadLine(), out precoInicial);
+    if (!isDecimal)
+    {
+        Console.WriteLine("Favor digitar somente números. Ex: 00.00");
+    }
 
-Console.WriteLine("Agora digite o preço por hora:");
-precoPorHora = Convert.ToDecimal(Console.ReadLine());
+} while (!isDecimal);
+
+do
+{
+    Console.WriteLine("Agora digite o preço por hora:");
+    isDecimal = Decimal.TryParse(Console.ReadLine(), out precoPorHora);
+    if (!isDecimal)
+    {
+        Console.WriteLine("Favor digitar somente números. Ex: 00,00");
+    }
+
+} while (!isDecimal);
+
 
 // Instancia a classe Estacionamento, já com os valores obtidos anteriormente
 Estacionamento es = new Estacionamento(precoInicial, precoPorHora);
